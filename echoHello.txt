@@ -1,1 +1,1 @@
-<?PHP echo "Hello RFI"; ?>
+hii
