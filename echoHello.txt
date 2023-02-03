@@ -1,1 +1,1 @@
-<?php echo "RFI FOUND" ?>
+<?PHP echo "Hello RFI"; ?>
