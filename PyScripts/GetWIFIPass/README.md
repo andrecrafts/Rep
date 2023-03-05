@@ -1,15 +1,26 @@
-# Retrieve Stored WIFI Passwords
+# GetWIFIPass
 
 
-  ### > Retrieve all passwords from WIFI profiles, stored in a Windows Machine.
+  ### > Retrieves all passwords from stored WIFI profiles. Windows Only
   
   ## Table of Contents
 * [Installation](#installation)
-* [Technologies Used](#technologies-used)
-* [Project Status](#project-status)
+* [Example Usage](#Example-Usage)
 * [Contact](#contact)
-* [Credit](#credit)
 <!-- * [License](#license) -->
 
 ## Installation
- - `git clone https://github.com/WafflesExploit/PythonScripts/RetrieveStoredWifiPasswords`
+ ```
+ $ git clone https://github.com/WafflesExploit/Rep/PyScripts/GetWIFIPass
+ ```
+ 
+## Example Usage
+```
+PS C:\GetWIFIPass> py.exe .\GetWIFIPass.py
+MEO-673248                     | Password!
+MEO-A58C08                     | SekrtK3y!
+NOS-FAD6-5                     | ESR4FWV4
+My Phone                       | 123456787
+```
+## Contact
+Created by [@WafflesExploit](https://github.com/WafflesExploit) - feel free to contact me!
