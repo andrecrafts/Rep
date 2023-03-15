@@ -6,7 +6,7 @@ Rep-Main
 ├───PyScripts
 │   │   HTBCalculator.py
 │   |
-│   |───GetWIFIPass
+│   ├───GetWIFIPass
 │   └───SMTP MX Enumerator
 │ 
 │
