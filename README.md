@@ -1,14 +1,14 @@
 # Waffles' Rep
 
-### > A repository where I host all my scripts.
+### > A repository where I host my scripts.
 ```
 Rep-Main
 ├───PyScripts
 │   │   HTBCalculator.py
-│   │
-│   └───GetWIFIPass
-│           GetWIFIPass.py
-│           README.md
+│   |
+│   |───GetWIFIPass
+│   └───SMTP MX Enumerator
+│ 
 │
 └───UtilScripts
         ttf.sh
