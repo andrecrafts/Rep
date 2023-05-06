@@ -1,10 +1,14 @@
-## 1.
+## Just run tools.sh to get all the tools
 
-### WinPEAS - https://github.com/carlospolop/privilege-escalation-awesome-scripts-suite/tree/master/winPEAS
+### $ `sudo ./tools.sh`
 
-### PowerUp - https://github.com/PowerShellMafia/PowerSploit/tree/master/Privesc
+## Tools
 
-## 2.
+### Run this 2 First: 
+
+- ### WinPEAS - https://github.com/carlospolop/privilege-escalation-awesome-scripts-suite/tree/master/winPEAS
+
+- ### PowerUp - https://github.com/PowerShellMafia/PowerSploit/tree/master/Privesc
 
 ### Windows Exploit Suggester - https://github.com/AonCyberLabs/Windows-Exploit-Suggester
 
