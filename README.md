@@ -3,14 +3,18 @@
 ### > A repository where I host my scripts.
 ```
 Rep-Main
-├───PyScripts
-│   │   HTBCalculator.py
-│   |
-│   ├───GetWIFIPass
-│   └───SMTP MX Enumerator
-│ 
-│
-└───UtilScripts
-        ttf.sh
-        thmvpn
+├── PrivEscTools
+│   ├── README.md
+│   └── tools.sh
+├── PyScripts
+│   ├── GetWIFIPass
+│   │   ├── GetWIFIPass.py
+│   │   └── README.md
+│   ├── HTBCalculator.py
+│   └── SMTP MX Enumerator
+│       └── smtp-records-enum.py
+├── README.md
+└── UtilScripts
+    ├── thmvpn
+    └── ttf.sh
 ```
