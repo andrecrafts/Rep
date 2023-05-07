@@ -75,7 +75,9 @@ for key in "${!ltools[@]}"; do
 		mv master.zip $key.zip
 		output=$key.zip
 		echo "${lightgreen}-> Created $output"
-		rm $key-master -r
+		if [ -d "$key-master" ]; then
+			rm $key-master -r
+		fi
 		fdots 1
 		echo -n "${lightblue}-> Extracting $key.zip"
 		unzip -qq $output
@@ -133,7 +135,9 @@ for key in "${!wtools[@]}"; do
 		mv master.zip $key.zip
 		output=$key.zip
 		echo "${lightgreen}-> Created $output"
-		rm $key-master -r
+		if [ -d "$key-master" ]; then
+			rm $key-master -r
+		fi
 		fdots 1
 		echo -n "${lightblue}-> Extracting $key.zip"
 		unzip -qq $output
