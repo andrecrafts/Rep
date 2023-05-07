@@ -1,7 +1,9 @@
 ## Just run tools.sh to get all the tools
 
-### $ `sudo ./tools.sh`
-
+```
+$ sudo ./tools.sh
+-> Downloads Tools for privilege escalation.
+```
 ## Linux Tools
 
 ### LinPEAS - https://github.com/carlospolop/PEASS-ng/tree/master/linPEAS
