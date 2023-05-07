@@ -37,14 +37,14 @@ fdots(){
 
 
 if [[ ! (-d LinPriv) ]]; then
-	echo "${green}LinPriv created."
+	echo "${green}LinPriv created"
 	mkdir LinPriv
 	cd LinPriv
 else
-	echo "${orange}LinPriv already created."
+	echo "${orange}LinPriv already created"
 	cd LinPriv
 fi
-echo "${aqua}Moving in to LinPriv."
+echo "${aqua}Moving in to LinPriv"
 
 
 declare -A ltools
@@ -52,24 +52,40 @@ ltools[LinPEAS]="https://github.com/carlospolop/PEASS-ng/releases/download/20230
 ltools[LinEnum]="https://raw.githubusercontent.com/rebootuser/LinEnum/master/LinEnum.sh "
 ltools[linux-exploit-suggester]="https://raw.githubusercontent.com/The-Z-Labs/linux-exploit-suggester/master/linux-exploit-suggester.sh "
 ltools[Linux-smart-enumeration]="https://github.com/diego-treitos/linux-smart-enumeration/releases/download/4.11nw/lse.sh "
+
 for key in "${!ltools[@]}"; do
 	val="${ltools[$key]}"
 	fieldcount=$(tr -dc '/' <<< $val | wc -c)
 	fieldnum=$(expr $fieldcount + 1)
 	output=$(cut -d "/" -f $fieldnum <<< $val)
+	
 	if [ -f $output ]; then
+	   if [ $output == "master.zip" ];then
+		rm $key.zip
+		rm $key -r
+	   fi
 	   rm $output
 	fi
 	
 	echo -n "${lightblue}-> Downloading $key."
 	fdots 1
 	wget -q $val; chmod +x $output
+	fdots 0
 	if [ $output == "master.zip" ];then
 		mv master.zip $key.zip
-		output=$key.sh
+		output=$key.zip
+		echo "${lightgreen}-> Created $output"
+		rm $key-master -r
+		fdots 1
+		echo -n "${lightblue}-> Extracting $key.zip"
+		unzip -qq $output
+		rm $key.zip
+		fdots 0
+		echo "${lightgreen}-> Extracted $key.zip to $key-master"
+	else
+		echo "${lightgreen}-> Created $output"
 	fi
-	fdots 0
-	echo "${lightgreen}-> Created $output"
+	
 done
 
 declare -A wtools
@@ -86,14 +102,14 @@ wtools[SharpUp]="https://github.com/GhostPack/SharpUp/archive/refs/heads/master.
 
 cd ..
 if [[ ! (-d WinPriv) ]]; then
-	echo "${green}WinPriv created."
+	echo "${green}WinPriv created"
 	mkdir WinPriv
 	cd WinPriv
 else
-	echo "${orange}WinPriv already created."
+	echo "${orange}WinPriv already created"
 	cd WinPriv
 fi
-echo "${aqua}Moving in to WinPriv."
+echo "${aqua}Moving in to WinPriv"
 
 for key in "${!wtools[@]}"; do
 	val="${wtools[$key]}"
@@ -102,19 +118,34 @@ for key in "${!wtools[@]}"; do
 	output=$(cut -d "/" -f $fieldnum <<< $val)
 	
 	if [ -f $output ]; then
+	   if [ $output == "master.zip" ];then
+		rm $key.zip
+		rm $key -r
+	   fi
 	   rm $output
 	fi
 	
 	echo -n "${lightblue}-> Downloading $key."
 	fdots 1
 	wget -q $val; chmod +x $output
+	fdots 0
 	if [ $output == "master.zip" ];then
 		mv master.zip $key.zip
 		output=$key.zip
+		echo "${lightgreen}-> Created $output"
+		rm $key-master -r
+		fdots 1
+		echo -n "${lightblue}-> Extracting $key.zip"
+		unzip -qq $output
+		rm $key.zip
+		fdots 0
+		echo "${lightgreen}-> Extracted $key.zip to $key-master"
+	else
+		echo "${lightgreen}-> Created $output"
 	fi
-	fdots 0
-	echo "${lightgreen}-> Created $output"
+	
 done
+
 
 echo "${lightyellow}------Finished all Downloads------"
 
