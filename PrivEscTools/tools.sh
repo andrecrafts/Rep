@@ -57,7 +57,6 @@ for key in "${!ltools[@]}"; do
 	fieldcount=$(tr -dc '/' <<< $val | wc -c)
 	fieldnum=$(expr $fieldcount + 1)
 	output=$(cut -d "/" -f $fieldnum <<< $val)
-	
 	if [ -f $output ]; then
 	   rm $output
 	fi
@@ -65,6 +64,10 @@ for key in "${!ltools[@]}"; do
 	echo -n "${lightblue}-> Downloading $key."
 	fdots 1
 	wget -q $val; chmod +x $output
+	if [ $output == "master.zip" ];then
+		mv master.zip $key.zip
+		output=$key.sh
+	fi
 	fdots 0
 	echo "${lightgreen}-> Created $output"
 done
@@ -105,6 +108,10 @@ for key in "${!wtools[@]}"; do
 	echo -n "${lightblue}-> Downloading $key."
 	fdots 1
 	wget -q $val; chmod +x $output
+	if [ $output == "master.zip" ];then
+		mv master.zip $key.zip
+		output=$key.zip
+	fi
 	fdots 0
 	echo "${lightgreen}-> Created $output"
 done
