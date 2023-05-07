@@ -21,7 +21,7 @@ fi
 dots(){
  while true; do
  	echo -ne "."
- 	sleep 0.2
+ 	sleep 0.5
  done
 }
 pid=a
@@ -153,3 +153,9 @@ done
 
 echo "${lightyellow}------Finished all Downloads------"
 
+echo "${lightblue}------Installing dependencies------"
+fdots 1
+echo -n "-> Installing dependencies for Windows-Exploit-Suggester"
+pip install xlrd --upgrade 1>/dev/null
+curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py; python get-pip.py 1>/dev/null
+fdots 0
