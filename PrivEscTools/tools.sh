@@ -158,4 +158,6 @@ fdots 1
 echo -n "-> Installing dependencies for Windows-Exploit-Suggester"
 pip install xlrd --upgrade 1>/dev/null
 curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py; python get-pip.py 1>/dev/null
+rm get-pip.py
 fdots 0
+echo "${lightyellow}------Finished Running------"
