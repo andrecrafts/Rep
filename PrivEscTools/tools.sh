@@ -55,6 +55,8 @@ ltools[Linux-smart-enumeration]="https://github.com/diego-treitos/linux-smart-en
 
 for key in "${!ltools[@]}"; do
 	val="${ltools[$key]}"
+	mkdir $key
+	cd $key
 	fieldcount=$(tr -dc '/' <<< $val | wc -c)
 	fieldnum=$(expr $fieldcount + 1)
 	output=$(cut -d "/" -f $fieldnum <<< $val)
@@ -87,6 +89,7 @@ for key in "${!ltools[@]}"; do
 	else
 		echo "${lightgreen}-> Created $output"
 	fi
+	cd ..
 	
 done
 
@@ -95,7 +98,7 @@ wtools[winPEAS_bat]="https://github.com/carlospolop/PEASS-ng/releases/download/2
 wtools[winPEASx64_exe]="https://github.com/carlospolop/PEASS-ng/releases/download/20230425-bd7331ea/winPEASx64.exe "
 wtools[winPEASx86_exe]="https://github.com/carlospolop/PEASS-ng/releases/download/20230425-bd7331ea/winPEASx86.exe "
 wtools[PowerUp]="https://raw.githubusercontent.com/PowerShellMafia/PowerSploit/master/Privesc/PowerUp.ps1 "
-wtools[Windows-Exploit-Suggester]="https://raw.githubusercontent.com/AonCyberLabs/Windows-Exploit-Suggester/master/windows-exploit-suggester.py "
+wtools[Windows-Exploit-Suggester]="https://raw.githubusercontent.com/bitsadmin/wesng/master/wes.py "
 wtools[Sherlock]="https://raw.githubusercontent.com/rasta-mouse/Sherlock/master/Sherlock.ps1 "
 wtools[Watson]="https://github.com/rasta-mouse/Watson/archive/refs/heads/master.zip "
 wtools[JAWS]="https://raw.githubusercontent.com/411Hall/JAWS/master/jaws-enum.ps1 "
@@ -115,6 +118,8 @@ echo "${aqua}Moving in to WinPriv"
 
 for key in "${!wtools[@]}"; do
 	val="${wtools[$key]}"
+	mkdir $key
+	cd $key
 	fieldcount=$(tr -dc '/' <<< $val | wc -c)
 	fieldnum=$(expr $fieldcount + 1)
 	output=$(cut -d "/" -f $fieldnum <<< $val)
@@ -147,6 +152,7 @@ for key in "${!wtools[@]}"; do
 	else
 		echo "${lightgreen}-> Created $output"
 	fi
+	cd ..
 	
 done
 
