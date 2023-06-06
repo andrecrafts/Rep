@@ -10,6 +10,8 @@ aqua=`echo -en "\e[36m"`
 green=`echo -en "\e[32m"`
 orange=`echo -en "\e[33m"`
 echo "${lightyellow}------Waffles' Downloads------"
+echo "${white}This script needs sudo to install dependencies, so write your password in the following prompt:"
+sudo echo "${white}Successfully entered sudo."
 
 
 if [[ $1 == '-h' ]]; then
@@ -55,8 +57,13 @@ ltools[Linux-smart-enumeration]="https://github.com/diego-treitos/linux-smart-en
 
 for key in "${!ltools[@]}"; do
 	val="${ltools[$key]}"
-	mkdir $key
-	cd $key
+	key=$(echo "$key" | cut -d "_" -f 1)
+	if [ -d $key ]; then
+		cd $key
+	else
+		mkdir $key
+		cd $key
+	fi
 	fieldcount=$(tr -dc '/' <<< $val | wc -c)
 	fieldnum=$(expr $fieldcount + 1)
 	output=$(cut -d "/" -f $fieldnum <<< $val)
@@ -94,9 +101,10 @@ for key in "${!ltools[@]}"; do
 done
 
 declare -A wtools
+# Remember, to make files stay in the same folder use "_" Example: <foldername>_<filetype> -> winPEAS_bat
 wtools[winPEAS_bat]="https://github.com/carlospolop/PEASS-ng/releases/download/20230425-bd7331ea/winPEAS.bat "
-wtools[winPEASx64_exe]="https://github.com/carlospolop/PEASS-ng/releases/download/20230425-bd7331ea/winPEASx64.exe "
-wtools[winPEASx86_exe]="https://github.com/carlospolop/PEASS-ng/releases/download/20230425-bd7331ea/winPEASx86.exe "
+wtools[winPEAS_x64exe]="https://github.com/carlospolop/PEASS-ng/releases/download/20230425-bd7331ea/winPEASx64.exe "
+wtools[winPEAS_x86exe]="https://github.com/carlospolop/PEASS-ng/releases/download/20230425-bd7331ea/winPEASx86.exe "
 wtools[PowerUp]="https://raw.githubusercontent.com/PowerShellMafia/PowerSploit/master/Privesc/PowerUp.ps1 "
 wtools[Windows-Exploit-Suggester]="https://raw.githubusercontent.com/bitsadmin/wesng/master/wes.py "
 wtools[Sherlock]="https://raw.githubusercontent.com/rasta-mouse/Sherlock/master/Sherlock.ps1 "
@@ -118,8 +126,13 @@ echo "${aqua}Moving in to WinPriv"
 
 for key in "${!wtools[@]}"; do
 	val="${wtools[$key]}"
-	mkdir $key
-	cd $key
+	key=$(echo "$key" | cut -d "_" -f 1)
+	if [ -d $key ]; then
+		cd $key
+	else
+		mkdir $key
+		cd $key
+	fi
 	fieldcount=$(tr -dc '/' <<< $val | wc -c)
 	fieldnum=$(expr $fieldcount + 1)
 	output=$(cut -d "/" -f $fieldnum <<< $val)
@@ -155,15 +168,13 @@ for key in "${!wtools[@]}"; do
 	cd ..
 	
 done
-
-
-echo "${lightyellow}------Finished all Downloads------"
-
-echo "${lightblue}------Installing dependencies------"
+echo "${lightblue}-> Downloading & Installing Impacket"
 fdots 1
-echo -n "-> Installing dependencies for Windows-Exploit-Suggester"
-pip install xlrd --upgrade 1>/dev/null
-curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py; python get-pip.py 1>/dev/null
-rm get-pip.py
+sudo apt install pipx 1>/dev/null
+python3 -m pipx install impacket 1>/dev/null
+pipx ensurepath 1>/dev/null
 fdots 0
+echo "${lightgreen}-> Installed Impacket"
+echo ""
+echo "${lightyellow}------Finished all Downloads------"
 echo "${lightyellow}------Finished Running------"
