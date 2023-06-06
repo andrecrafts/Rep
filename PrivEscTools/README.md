@@ -6,21 +6,21 @@ $ sudo ./tools.sh
 ```
 ## Linux Tools
 
-### LinPEAS - https://github.com/carlospolop/PEASS-ng/tree/master/linPEAS
-### LinEnum - https://github.com/rebootuser/LinEnum/blob/master/LinEnum.sh
-### Linux-exploit-suggester - https://github.com/The-Z-Labs/linux-exploit-suggester
-### Linux-Smart-Enumeration - https://github.com/diego-treitos/linux-smart-enumeration
-### linuxprivchecker - https://github.com/linted/linuxprivchecker
+### [LinPEAS](https://github.com/carlospolop/PEASS-ng/tree/master/linPEAS)
+### [LinEnum](https://github.com/rebootuser/LinEnum/blob/master/LinEnum.sh)
+### [Linux-exploit-suggester](https://github.com/The-Z-Labs/linux-exploit-suggester)
+### [Linux-Smart-Enumeration](https://github.com/diego-treitos/linux-smart-enumeration)
+### [linuxprivchecker](https://github.com/linted/linuxprivchecker)
 
 ## Windows Tools
 
 ### Run this 2 First: 
 
-- ### [WinPEAS](https://github.com/carlospolop/privilege-escalation-awesome-scripts-suite/tree/master/winPEAS) -
+- ### [WinPEAS](https://github.com/carlospolop/privilege-escalation-awesome-scripts-suite/tree/master/winPEAS)
 
-- ### [PowerUp](https://github.com/PowerShellMafia/PowerSploit/tree/master/Privesc) - 
+- ### [PowerUp](https://github.com/PowerShellMafia/PowerSploit/tree/master/Privesc) 
 
-### [Windows Exploit Suggester](https://github.com/bitsadmin/wesng) - 
+### [Windows Exploit Suggester](https://github.com/bitsadmin/wesng)
 
 ### [Windows PrivEsc Checklist](https://book.hacktricks.xyz/windows/checklist-windows-privilege-escalation)
 
