@@ -12,15 +12,15 @@ stop(){
 	sudo kill $id
 }
 if [[ $1 == "start" ]]; then
-	start()
+	start
 	echo "OpenVPN Started"
 fi
 if [[ $1 == "stop" ]]; then
-	stop()
+	stop
 	echo "OpenVPN Stopped"
 fi
 if [[ $1 == "restart" ]]; then
-	stop()
-	start()
+	stop
+	start
 	echo "OpenVPN Restarted"
 fi
