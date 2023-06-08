@@ -4,12 +4,23 @@ if [[ $EUID -ne 0 ]]; then
 	echo "Please run with sudo."
 	exit 1
 fi
-if [[ $1 == "start" ]]; then
+start(){
 	sudo openvpn $dir/WafflesExploit.ovpn&
+}
+stop(){
+	id=$(pgrep openvpn)
+	sudo kill $id
+}
+if [[ $1 == "start" ]]; then
+	start()
 	echo "OpenVPN Started"
 fi
 if [[ $1 == "stop" ]]; then
-	id=$(pgrep openvpn)
-	sudo kill $id
-	echo "OpenVPN Closed"
+	stop()
+	echo "OpenVPN Stopped"
+fi
+if [[ $1 == "restart" ]]; then
+	stop()
+	start()
+	echo "OpenVPN Restarted"
 fi
