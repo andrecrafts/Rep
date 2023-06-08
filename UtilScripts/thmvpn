@@ -9,7 +9,7 @@ start(){
 }
 stop(){
 	id=$(pgrep openvpn)
-	sudo kill $id
+	sudo kill $id 1>/dev/null
 }
 if [[ $1 == "start" ]]; then
 	start
