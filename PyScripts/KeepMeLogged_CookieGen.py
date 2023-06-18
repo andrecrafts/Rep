@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Created by https://github.com/WafflesExploit
 import base64
 import hashlib
 
