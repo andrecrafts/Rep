@@ -66,6 +66,7 @@ print("| By (https://github.com/WafflesExploit)")
 NumberOfMatches = 0
 print("|")
 print("| Results: ")
+file = open(Output, "w+")
 for URLs in URLWordlist:
 	data = cmd(f"curl -X OPTIONS {URLs} -i") # Runs the curl command for every URL in the URLWordlist
 	
@@ -81,15 +82,21 @@ for URLs in URLWordlist:
 		print(f"| - HTTP Methods found: ", end=" ")
 		MethodsList = (", ".join(methodus))
 		print(MethodsList) # Use the join() method to concatenate the methods with a comma separator
-		if (Output is not None):
-			with open(f'{Output}', "w") as f: # Opens and automatically closes the passwordfile.
-				f.writelines(f"{URLs} - {MethodsList}")
-		print("| ")
-		print(f"| Results have been outputted to: {Output}.")
+		if (Output is not None): 
+			file.write(f"{URLs} - {MethodsList}\n")
+
+file.close()
+			
+				
+
 			
 	
 if (NumberOfMatches == 0):
 	print("| - No Methods were found -")
+else:
+	print("| ")
+	print(f"| Results have been outputted to: {Output}.")
+
 print("|")
 EndTime = time.time()
 RunTime = EndTime - StartTime
