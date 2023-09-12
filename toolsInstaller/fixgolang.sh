@@ -1,4 +1,5 @@
 #!/bin/bash
+# Credit goes to https://github.com/Dewalt-arch/pimpmykali/blob/master/pimpmykali.sh
 fix_golang() {
     section="golang"  #check this golang or golang-go?
     check=$(whereis go  | grep -i -c "/usr/bin/go")
