@@ -18,14 +18,50 @@ orange=`echo -en "\e[33m"`
 
 initialdir=$(pwd)
 
-echo "${lightyellow}------Waffles' Downloads------"
+help(){
+    echo "${white} usage: tools.sh [-h] [ [-a ALL] [-p PRIVESC] [-u UTIL] [-i INSDES] [-o OTHERS] [-f FIX] ] "
+    echo ""
+    echo "${white}-> Downloads Tools & Installs Dependecies/Fixes."
+    echo ""
+    echo "options:"
+    echo "-h, --help       Show this help message and exit."
+    echo "-a, --all        Runs all operations [privesc, util, fix, insdes others]."
+    echo "-p, --privesc    Downloads privesc tools."
+    echo "-u, --util       Downloads utility scripts."
+    echo "-i, --insdes     Downloads insecure deserialization tools." 
+    echo "-o, --others     Downloads/Installs others tools. Ex: haiti, cook..."
+    echo "-f, --fix        Installs dependecies & fixes."
+    exit 1
+}
+privesc=false
+util=false
+fix=false
+others=false
+insdes=false
 
-
-if [[ $1 == '-h' ]]; then
-        echo "${white}-$ ./tools.sh "
-        echo "${white}-> Downloads Tools for privilege escalation."
-        exit 0
+if [[ $1 == '-h' || $1 == '--help' ]]; then
+    help
+elif [[ $1 == '-a' || $1 == '--all' ]]; then
+    privesc=true
+    util=true
+    fix=true
+    others=true
+    insdes=true
+elif [[ $1 == '-p' || $1 == '--privesc' ]]; then
+    privesc=true
+elif [[ $1 == '-u' || $1 == '--util' ]]; then
+    util=true
+elif [[ $1 == '-f' ||  $1 == '--fix' ]]; then
+    fix=true
+elif [[ $1 == '-i' || $1 == '--insdes' ]]; then
+    insdes=true
+elif [[ $1 == '-o' || $1 == '--others' ]]; then
+    others=true
+else
+    help
 fi
+
+echo "${lightyellow}------Waffles' Downloads------"
 
 gotoInitialDIR(){
     cd $initialdir
@@ -99,7 +135,7 @@ DownloadGithub(){
             fi
             fdots 1
             echo -n "${lightblue}-> Extracting $key.zip"
-            unzip -qq $output
+            unzip -qq -o $output
             rm $key.zip
             fdots 0
             echo "${lightgreen}-> Extracted $key.zip to $key-master"
@@ -189,98 +225,126 @@ InstallOtherTools(){
 # **** Dependecies/Fixes ****
 # ***************************
 
-echo "${lightyellow}------Dependecies/Fixes----"
+if [ $fix == true ]; then 
+    echo "${lightyellow}------Dependecies/Fixes----"
 
-echo "${white}This script needs sudo to install dependencies/fixes, so write your password in the following prompt:"
-sudo echo "${white}Successfully entered sudo."
+    echo "${white}This script needs sudo to install dependencies/fixes, so write your password in the following prompt:"
+    sudo echo "${white}Successfully entered sudo."
 
-CheckforGolang
+    CheckforGolang
 
-CheckforImpacket
+    CheckforImpacket
+
+    echo "${lightyellow}------Finished------"
+    echo ""
+fi
 
 gotoInitialDIR
-
-echo "${lightyellow}------Finished------"
-echo ""
-
+cd .. # Leaves Folder /toolsInstaller
 
 # *************************
 # **** Start of Script ****
 # *************************
-echo "${lightyellow}------Download Tools------"
 
+# ** PrivEsc/Start/ **
+if [ $privesc == true ]; then
+    echo "${lightyellow}------Download Tools------"
+
+    folderCheck 'PrivEscTools'
+
+
+    # ** LinPriv/Start/ **
+    folderCheck 'LinPriv'
+
+    unset GitTools # Clear the elements of GitTools
+    # Remember to leave a space character, after the URL. 
+    # Remember, to make files stay in the same folder use "_" Example: <foldername>_<filetype> -> winPEAS_bat
+    # If you don't have a download link, view the file as raw, and use that link. Example: https://raw.githubusercontent.com/example.sh/
+    declare -A GitTools 
+    GitTools[LinPEAS]="https://github.com/carlospolop/PEASS-ng/releases/download/20230425-bd7331ea/linpeas.sh "
+    GitTools[LinEnum]="https://raw.githubusercontent.com/rebootuser/LinEnum/master/LinEnum.sh "
+    GitTools[linux-exploit-suggester]="https://raw.githubusercontent.com/The-Z-Labs/linux-exploit-suggester/master/linux-exploit-suggester.sh "
+    GitTools[Linux-smart-enumeration]="https://github.com/diego-treitos/linux-smart-enumeration/releases/download/4.11nw/lse.sh "
+
+    DownloadGithub
+    # ** LinPriv/End/ **
+
+
+    cd .. # Move to /PrivEscTools folder.
+
+
+    # ** WinPriv/Start/ **
+    unset GitTools # Clear the elements of GitTools
+    # Remember to leave a space character, after the URL. 
+    # Remember, to make files stay in the same folder use "_" Example: <foldername>_<filetype> -> winPEAS_bat
+    # If you don't have a download link, view the file as raw, and use that link. Example: https://raw.githubusercontent.com/example.sh/
+    declare -A GitTools 
+    GitTools[winPEAS_bat]="https://github.com/carlospolop/PEASS-ng/releases/download/20230425-bd7331ea/winPEAS.bat "
+    GitTools[winPEAS_x64exe]="https://github.com/carlospolop/PEASS-ng/releases/download/20230425-bd7331ea/winPEASx64.exe "
+    GitTools[winPEAS_x86exe]="https://github.com/carlospolop/PEASS-ng/releases/download/20230425-bd7331ea/winPEASx86.exe "
+    GitTools[PowerUp]="https://raw.githubusercontent.com/PowerShellMafia/PowerSploit/master/Privesc/PowerUp.ps1 "
+    GitTools[Windows-Exploit-Suggester]="https://raw.githubusercontent.com/bitsadmin/wesng/master/wes.py "
+    GitTools[Sherlock]="https://raw.githubusercontent.com/rasta-mouse/Sherlock/master/Sherlock.ps1 "
+    GitTools[Watson]="https://github.com/rasta-mouse/Watson/archive/refs/heads/master.zip "
+    GitTools[JAWS]="https://raw.githubusercontent.com/411Hall/JAWS/master/jaws-enum.ps1 "
+    GitTools[Seatbelt]="https://github.com/GhostPack/Seatbelt/archive/refs/heads/master.zip "
+    GitTools[SharpUp]="https://github.com/GhostPack/SharpUp/archive/refs/heads/master.zip "
+
+
+    folderCheck 'WinPriv'
+
+    DownloadGithub
+    # ** WinPriv/End/ **
+fi
+# ** PrivEsc/End/ **
+
+gotoInitialDIR
 cd .. # Leaves Folder /toolsInstaller
 
+# ** Insecure Deserialization/Start/ **
+if [ $insdes == true ]; then
+    unset GitTools # Clear the elements of GitTools
+    # Remember to leave a space character, after the URL. 
+    # Remember, to make files stay in the same folder use "_" Example: <foldername>_<filetype> -> winPEAS_bat
+    # If you don't have a download link, view the file as raw, and use that link. Example: https://raw.githubusercontent.com/example.sh/
+    declare -A GitTools 
+    GitTools[ysoserial-JAVA]='https://github.com/frohoff/ysoserial/releases/download/v0.0.6/ysoserial-all.jar '
+    GitTools[ysoserial-NET]='https://github.com/pwntester/ysoserial.net/releases/download/v1.35/ysoserial-1.35.zip '
+    GitTools[PHPGGC-PHP]='https://github.com/ambionics/phpggc/archive/refs/heads/master.zip '
+    folderCheck 'Insecure_Deserialization'
 
-folderCheck 'PrivEscTools'
+    DownloadGithub
+fi
+# ** Insecure Deserialization/End/ **
 
-
-# ** LinPriv/Start/ **
-folderCheck 'LinPriv'
-
-unset GitTools # Clear the elements of GitTools
-# Remember to leave a space character, after the URL. 
-# Remember, to make files stay in the same folder use "_" Example: <foldername>_<filetype> -> winPEAS_bat
-# If you don't have a download link, view the file as raw, and use that link. Example: https://raw.githubusercontent.com/example.sh/
-declare -A GitTools 
-GitTools[LinPEAS]="https://github.com/carlospolop/PEASS-ng/releases/download/20230425-bd7331ea/linpeas.sh "
-GitTools[LinEnum]="https://raw.githubusercontent.com/rebootuser/LinEnum/master/LinEnum.sh "
-GitTools[linux-exploit-suggester]="https://raw.githubusercontent.com/The-Z-Labs/linux-exploit-suggester/master/linux-exploit-suggester.sh "
-GitTools[Linux-smart-enumeration]="https://github.com/diego-treitos/linux-smart-enumeration/releases/download/4.11nw/lse.sh "
-
-DownloadGithub
-# ** LinPriv/End/ **
-
-
-cd .. # Move to /PrivEscTools folder.
-
-
-# ** WinPriv/Start/ **
-unset GitTools # Clear the elements of GitTools
-# Remember to leave a space character, after the URL. 
-# Remember, to make files stay in the same folder use "_" Example: <foldername>_<filetype> -> winPEAS_bat
-# If you don't have a download link, view the file as raw, and use that link. Example: https://raw.githubusercontent.com/example.sh/
-declare -A GitTools 
-GitTools[winPEAS_bat]="https://github.com/carlospolop/PEASS-ng/releases/download/20230425-bd7331ea/winPEAS.bat "
-GitTools[winPEAS_x64exe]="https://github.com/carlospolop/PEASS-ng/releases/download/20230425-bd7331ea/winPEASx64.exe "
-GitTools[winPEAS_x86exe]="https://github.com/carlospolop/PEASS-ng/releases/download/20230425-bd7331ea/winPEASx86.exe "
-GitTools[PowerUp]="https://raw.githubusercontent.com/PowerShellMafia/PowerSploit/master/Privesc/PowerUp.ps1 "
-GitTools[Windows-Exploit-Suggester]="https://raw.githubusercontent.com/bitsadmin/wesng/master/wes.py "
-GitTools[Sherlock]="https://raw.githubusercontent.com/rasta-mouse/Sherlock/master/Sherlock.ps1 "
-GitTools[Watson]="https://github.com/rasta-mouse/Watson/archive/refs/heads/master.zip "
-GitTools[JAWS]="https://raw.githubusercontent.com/411Hall/JAWS/master/jaws-enum.ps1 "
-GitTools[Seatbelt]="https://github.com/GhostPack/Seatbelt/archive/refs/heads/master.zip "
-GitTools[SharpUp]="https://github.com/GhostPack/SharpUp/archive/refs/heads/master.zip "
-
-
-folderCheck 'WinPriv'
-
-DownloadGithub
-# ** WinPriv/End/ **
-
-
-cd .. # Move to /PrivEscTools.
-
-cd .. # Move to initial folder.
-
+gotoInitialDIR
+cd .. # Leaves Folder /toolsInstaller
 
 # ** UtilScripts/Start/ **
-folderCheck 'UtilScripts'
-unset GitTools # Clear the elements of GitTools
-# Remember to leave a space character, after the URL. 
-# Remember, to make files stay in the same folder use "_" Example: <foldername>_<filetype> -> winPEAS_bat
-# If you don't have a download link, view the file as raw, and use that link. Example: https://raw.githubusercontent.com/example.sh/
-declare -A GitTools 
-GitTools[PimpMyKali]="https://raw.githubusercontent.com/Dewalt-arch/pimpmykali/master/pimpmykali.sh "
+if [ $util == true ]; then
+    folderCheck 'UtilScripts'
+    unset GitTools # Clear the elements of GitTools
+    # Remember to leave a space character, after the URL. 
+    # Remember, to make files stay in the same folder use "_" Example: <foldername>_<filetype> -> winPEAS_bat
+    # If you don't have a download link, view the file as raw, and use that link. Example: https://raw.githubusercontent.com/example.sh/
+    declare -A GitTools 
+    GitTools[PimpMyKali]="https://raw.githubusercontent.com/Dewalt-arch/pimpmykali/master/pimpmykali.sh "
 
-DownloadGithub
+    DownloadGithub
+fi
 # ** UtilScripts/End/ **
 
+gotoInitialDIR
+cd .. # Leaves Folder /toolsInstaller
 
 # ** Other Tools/Start/ **
-InstallOtherTools
+if [ $others == true ]; then
+    InstallOtherTools
+fi
 # ** Other Tools/End/**
 
+gotoInitialDIR
+cd .. # Leaves Folder /toolsInstaller
 
 echo "${lightyellow}------Finished all Downloads------"
 echo "${lightyellow}------Finished Running------------"
