@@ -99,51 +99,66 @@ folderCheck(){ # Checks if folder exists, if not creates one. After the check it
 }
 declare -A GitTools
 
+fileDownload(){
+    Value=$1
+    File=$2
+    Outputfile=$3
+    fdots 1
+    echo -n "${lightblue}-> Downloading $File."
+    wget -q -O $Outputfile $Value; chmod +x $Outputfile
+    fdots 0
+}
+
 DownloadGithub(){
     # unset GitTools, and then create new elements for it.
     for key in "${!GitTools[@]}"; do
         val="${GitTools[$key]}"
+        file=$key
         key=$(echo "$key" | cut -d "_" -f 1)
+        
+        fieldcount=$(tr -dc '/' <<< $val | wc -c)
+        fieldnum=$(expr $fieldcount + 1)
+        output=$(cut -d "/" -f $fieldnum <<< $val)
+
+    check=$(echo $output | grep -i -c ".zip") # If the output is .zip
+    if [ $check == 1 ];then
+        if [ -d $key ]; then
+            rm $key -r
+        fi
+        mkdir 'temp'
+        cd 'temp'
+        
+        fileDownload $val $file $output
+
+        mv $output $key.zip
+        output=$key.zip
+        echo "${lightgreen}-> Created $output"
+        fdots 1
+        echo -n "${lightblue}-> Extracting $output"
+        unzip -qq -o $output
+        rm $key.zip
+        fdots 0
+        dir=$(ls | grep ".")
+        if [ -d $dir ]; then
+            mv $dir $key
+            mv $key ../$key
+            cd ..
+            rm 'temp' -r
+        else
+            cd ..
+            mv 'temp' $key
+        fi
+        echo "${lightgreen}-> Extracted $output to $key-master"
+    else # If not
         if [ -d $key ]; then
             cd $key
         else
             mkdir $key
             cd $key
         fi
-        fieldcount=$(tr -dc '/' <<< $val | wc -c)
-        fieldnum=$(expr $fieldcount + 1)
-        output=$(cut -d "/" -f $fieldnum <<< $val)
-        
-        if [ -f $output ]; then
-        if [ $output == "master.zip" ];then
-            rm $key.zip
-            rm $key -r
-        fi
-        rm $output
-        fi
-        
-        echo -n "${lightblue}-> Downloading $key."
-        fdots 1
-        wget -q $val; chmod +x $output
-        fdots 0
-        if [ $output == "master.zip" ];then
-            mv master.zip $key.zip
-            output=$key.zip
-            echo "${lightgreen}-> Created $output"
-            if [ -d "$key-master" ]; then
-                rm $key-master -r
-            fi
-            fdots 1
-            echo -n "${lightblue}-> Extracting $key.zip"
-            unzip -qq -o $output
-            rm $key.zip
-            fdots 0
-            echo "${lightgreen}-> Extracted $key.zip to $key-master"
-        else
-            echo "${lightgreen}-> Created $output"
-        fi
+        fileDownload $val $file $output
         cd ..
-        
+    fi
     done
 }
 
@@ -308,9 +323,9 @@ if [ $insdes == true ]; then
     # Remember, to make files stay in the same folder use "_" Example: <foldername>_<filetype> -> winPEAS_bat
     # If you don't have a download link, view the file as raw, and use that link. Example: https://raw.githubusercontent.com/example.sh/
     declare -A GitTools 
-    GitTools[ysoserial-JAVA]='https://github.com/frohoff/ysoserial/releases/download/v0.0.6/ysoserial-all.jar '
-    GitTools[ysoserial-NET]='https://github.com/pwntester/ysoserial.net/releases/download/v1.35/ysoserial-1.35.zip '
-    GitTools[PHPGGC-PHP]='https://github.com/ambionics/phpggc/archive/refs/heads/master.zip '
+    GitTools[ysoserial-JAVA]="https://github.com/frohoff/ysoserial/releases/download/v0.0.6/ysoserial-all.jar "
+    GitTools[ysoserial-NET]="https://github.com/pwntester/ysoserial.net/releases/download/v1.35/ysoserial-1.35.zip "
+    GitTools[PHPGGC-PHP]="https://github.com/ambionics/phpggc/archive/refs/heads/master.zip "
     folderCheck 'Insecure_Deserialization'
 
     DownloadGithub
