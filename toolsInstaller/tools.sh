@@ -112,8 +112,8 @@ DownloadGithub(){
 }
 
 InstallImpacket(){
-    echo "${lightblue}-> Downloading & Installing Impacket"
     fdots 1
+    echo -n "${lightblue}-> Downloading & Installing Impacket"
     sudo apt install pipx 1>/dev/null
     python3 -m pipx install impacket 1>/dev/null
     pipx ensurepath 1>/dev/null
@@ -125,9 +125,7 @@ InstallImpacket(){
 CheckforImpacket(){
     check=$(whereis impacket  | grep -i -c "/usr/share/impacket")
     if [ $check -ne 1 ]; then
-        echo "${lightblue}->Installing & Fixing Impacket"
         InstallImpacket
-        echo "${lightgreen}-> Installed Impacket"
     else
         echo "${orange}-> Impacket already installed"
     fi
@@ -135,22 +133,58 @@ CheckforImpacket(){
 
 InstallGolang(){
     fdots 1
+    echo -n "${lightblue}-> Installing & Fixing Go"
     gotoInitialDIR
     chmod +x fixgolang.sh
     ./fixgolang.sh 
+    echo "${lightgreen}-> Installed Go"
     fdots 0
 }
 CheckforGolang(){ # Checks if go is installed
     check=$(whereis go  | grep -i -c "/usr/bin/go")
     if [ $check -ne 1 ]; then
-        echo "${lightblue}->Installing & Fixing Go"
         InstallGolang
-        echo "${lightgreen}-> Installed Go"
     else
         echo "${orange}-> Golang already installed"
     fi
 }
+CheckIfInstalled(){
+    toolname=$1
+    toollocation=$2
+    command=$3
+    check=$(whereis $toolname  | grep -i -c "$toollocation")
+    if [ $check -ne 1 ]; then
+        fdots 1
+        echo -n "${lightblue}-> Installing $toolname"
+        eval "$command" 1>/dev/null
+        fdots 0
+        echo "${lightgreen}-> Installed $toolname"
+    else
+        echo "${orange}-> $toolname already installed"
+    fi
+}
+InstallCook(){
+    toolname="cook"
+    toollocation="/usr/bin/cook"
+    check=$(whereis $toolname  | grep -i -c "$toollocation")
+    if [ $check -ne 1 ]; then
+        fdots 1
+        echo -n "${lightblue}-> Installing $toolname"
+        go install -v github.com/glitchedgitz/cook/v2/cmd/cook@latest 2>/dev/null
+        cd ~/go/bin
+        sudo mv cook /usr/bin/cook
+        cook 2>/dev/null
+        fdots 0
+        echo "${lightgreen}-> Installed $toolname"
+    else
+        echo "${orange}-> $toolname already installed"
+    fi
+}
+InstallOtherTools(){
+    CheckIfInstalled "haiti" "/usr/local/bin/haiti" "sudo gem install haiti-hash"
+    InstallCook
 
+}
 # ***************************
 # **** Dependecies/Fixes ****
 # ***************************
@@ -242,6 +276,10 @@ GitTools[PimpMyKali]="https://raw.githubusercontent.com/Dewalt-arch/pimpmykali/m
 DownloadGithub
 # ** UtilScripts/End/ **
 
+
+# ** Other Tools/Start/ **
+InstallOtherTools
+# ** Other Tools/End/**
 
 
 echo "${lightyellow}------Finished all Downloads------"
