@@ -3,17 +3,24 @@
 ### > A repository where I host my scripts.
 ```
 Rep-Main
-├── PrivEscTools
-│   ├── README.md
-│   └── tools.sh
 ├── PyScripts
 │   ├── GetWIFIPass
-│   ├── HTTPMethodChecker
-│   ├── SMTP MX Enumerator
+│   │   ├── GetWIFIPass.py
+│   │   └── README.md
 │   ├── HTBCalculator.py
-│   └── KeepMeLogged_CookieGen.py
+│   ├── HTTPMethodChecker
+│   │   ├── HTTPMethodChecker.py
+│   │   └── README.md
+│   ├── KeepMeLogged_CookieGen.py
+│   └── SMTP MX Enumerator
+│       └── smtp-records-enum.py
 ├── README.md
+├── toolsInstaller
+│   ├── fixgolang.sh
+│   ├── README.md
+│   └── tools.sh
 └── UtilScripts
     ├── thmvpn
     └── ttf.sh
+
 ```
