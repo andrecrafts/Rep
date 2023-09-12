@@ -3,15 +3,15 @@
 - [ysoserial](https://github.com/frohoff/ysoserial) - Java Deserialization
 - [ysoserial.net](https://github.com/pwntester/ysoserial.net) - .NET Deserialization
 - [PHPGGC](https://github.com/ambionics/phpggc) - PHP Deserialization
-## > PrivEsc Tools:
-### > Linux:
+## PrivEsc Tools:
+### Linux:
 <!-- Dictionary to Link echo $text | sed 's.GitTools..g' | tr -d '=' | sed 's.".(.' | sed 's.".).' | tr -d " "-->
 - [LinPEAS](https://github.com/carlospolop/PEASS-ng/releases/download/20230425-bd7331ea/linpeas.sh)
 - [LinEnum](https://raw.githubusercontent.com/rebootuser/LinEnum/master/LinEnum.sh)
 - [linux-exploit-suggester](https://raw.githubusercontent.com/The-Z-Labs/linux-exploit-suggester/master/linux-exploit-suggester.sh)
 - [Linux-smart-enumeration](https://github.com/diego-treitos/linux-smart-enumeration/releases/download/4.11nw/lse.sh)
 
-### > Windows:
+### Windows:
 - [winPEAS_bat](https://github.com/carlospolop/PEASS-ng/releases/download/20230425-bd7331ea/winPEAS.bat)
 - [winPEAS_x64exe](https://github.com/carlospolop/PEASS-ng/releases/download/20230425-bd7331ea/winPEASx64.exe)
 -[winPEAS_x86exe](https://github.com/carlospolop/PEASS-ng/releases/download/20230425-bd7331ea/winPEASx86.exe)
@@ -26,7 +26,7 @@
 ## Fixes & Dependecies:
 - pipx
 - golang
-## > Util Tools:
+## Util Tools:
 - [impacket](https://github.com/fortra/impacket)
 - [pimpmykali](https://github.com/Dewalt-arch/pimpmykali/blob/master/pimpmykali.sh)
 - [haiti](https://github.com/noraj/haiti) - hashcracker
