@@ -25,7 +25,7 @@ help(){
     echo ""
     echo "options:"
     echo "-h, --help       Show this help message and exit."
-    echo "-a, --all        Runs all operations [privesc, util, fix, insdes others]."
+    echo "-a, --all        Runs all operations [privesc, util, fix, insdes, others]."
     echo "-p, --privesc    Downloads privesc tools."
     echo "-u, --util       Downloads utility scripts."
     echo "-i, --insdes     Downloads insecure deserialization tools." 
@@ -242,9 +242,9 @@ fi
 gotoInitialDIR
 cd .. # Leaves Folder /toolsInstaller
 
-# *************************
-# **** Start of Script ****
-# *************************
+# **********************
+# **** Script Start ****
+# **********************
 
 # ** PrivEsc/Start/ **
 if [ $privesc == true ]; then
