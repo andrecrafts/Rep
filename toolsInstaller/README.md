@@ -1,4 +1,8 @@
 # ToolsInstaller
+## Insecure Deserialization
+- [ysoserial](https://github.com/frohoff/ysoserial) - Java Deserialization
+- [ysoserial.net](https://github.com/pwntester/ysoserial.net) - .NET Deserialization
+- [PHPGGC](https://github.com/ambionics/phpggc) - PHP Deserialization
 ## > PrivEsc Tools:
 ### > Linux:
 <!-- Dictionary to Link echo $text | sed 's.GitTools..g' | tr -d '=' | sed 's.".(.' | sed 's.".).' | tr -d " "-->
