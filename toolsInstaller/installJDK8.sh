@@ -1,4 +1,5 @@
 #!/bin/bash
+# Created by WafflesExploit
 # Extracts and Installs Java 8 for Kali Linux to /usr/lib/jvm/jdk1.8.0_381 and Installs it.
 # Link: https://www.oracle.com/java/technologies/downloads/
 
