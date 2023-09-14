@@ -1,5 +1,5 @@
 #!/bin/bash
-# Extracts Java 8 to /usr/lib/jvm/jdk1.8.0_381 and Installs it.
+# Extracts and Installs Java 8 for Kali Linux to /usr/lib/jvm/jdk1.8.0_381 and Installs it.
 # Link: https://www.oracle.com/java/technologies/downloads/
 
 
@@ -13,7 +13,8 @@ orange=`echo -en "\e[33m"`
 
 if [[ $1 == "-h" || $1 == "" ]]; then
 	echo "./installjdk8.sh [PathToFile]"
-	echo " Example: /home/kali/Downloads/jdk-8u381-linux-x64.tar.gz"
+    echo " -> Extracts and Installs Java 8 for Kali Linux"
+    echo " Example: ./installjdk8.sh /home/kali/Downloads/jdk-8u381-linux-x64.tar.gz"
 	exit
 fi
 
