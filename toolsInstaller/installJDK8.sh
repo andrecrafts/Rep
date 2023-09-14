@@ -1,9 +1,7 @@
 #!/bin/bash
-# Created by https://github.com/WafflesExploit/WafflesExploit
-<<description
 # Extracts Java 8 to /usr/lib/jvm/jdk1.8.0_381 and Installs it.
 # Link: https://www.oracle.com/java/technologies/downloads/
-description
+
 
 lightgreen=`echo -en "\e[92m"`
 lightyellow=`echo -en "\e[93m"`
@@ -50,9 +48,33 @@ sudo tar -xzvf $Java_extract_file
 
 
 cd $jdk_dir
+javapath=":$jdk_dir/bin:$jdk_dir/jre/bin"
 
 echo "${lightgreen}->Extracted Java 8 to $jdk_dir."
-echo "${orange}Add the following to the end of PATH variable inside of /etc/environment:"
-echo "${white}:$jdk_dir/bin:$jdk_dir/jre/bin"
-echo ""
-echo "${lightblue}Example: ${white}PATH=/usr/local/sbin:$jdk_dir/bin:$jdk_dir/jre/bin"
+oldpath=$(cat /etc/environment | grep "PATH.*")
+check=$(cat /etc/environment | grep "PATH.*" | grep -i -c -P ":/usr/lib/jvm/jdk1.8.0_\d*/bin:/usr/lib/jvm/jdk1.8.0_\d*/jre/bin:?")
+if [ $check == 1 ]; then
+    pathToReplace=$(echo $oldpath | grep "PATH.*" | grep -i -o -P ":/usr/lib/jvm/jdk1.8.0_\d*/bin:/usr/lib/jvm/jdk1.8.0_\d*/jre/bin:?")    
+    sedstring='s\'$pathToReplace'\\'
+    sudo sed -i $sedstring /etc/environment
+    oldpath=$(cat /etc/environment | grep "PATH.*")
+    newpath="$oldpath$javapath"
+    sedstring='s\'$oldpath'\'$newpath'\'
+    sudo sed -i $sedstring /etc/environment
+else
+    newpath="$oldpath$javapath"
+    sedstring='s\'$oldpath'\'$newpath'\'
+    sudo sed -i $sedstring /etc/environment 
+fi
+
+echo "${lightgreen}->Added '$javapath' to PATH."
+
+silent=$(sudo update-alternatives --install "/usr/bin/java" "java" "$jdk_dir/bin/java" 0)
+silent=$(sudo update-alternatives --install "/usr/bin/java" "java" "$jdk_dir/bin/javac" 0)
+silent=$(sudo update-alternatives --set java $jdk_dir/bin/java)
+silent=$(sudo update-alternatives --set java $jdk_dir/bin/javac)
+up_al_output=$(echo | sudo update-alternatives --config java) 
+numToSelect=$(echo $up_al_output | grep -o -P "\d+\s+/usr/lib/jvm/jdk1.8.0_381/bin/java\s" | cut -d " " -f 1)
+action=$(echo $numToSelect | sudo update-alternatives --config java)
+
+echo "${lightyellow}->Java 1.8.0_$output has been successfully installed :)"
