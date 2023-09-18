@@ -1,5 +1,5 @@
 # Created by WafflesExploit
-# Solution to https://portswigger.net/web-security/graphql/lab-graphql-brute-force-protection-bypass
+# Solution to PortSwigger's Lab: Bypassing GraphQL brute force protections
 Wordlist = 'pass.txt'
 Output = 'output.txt'
 
