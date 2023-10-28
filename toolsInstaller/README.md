@@ -33,4 +33,7 @@
 - [cook](https://github.com/glitchedgitz/cook) - An overpower wordlist generator
 - [wordlistctl](https://github.com/BlackArch/wordlistctl) - Wordlist finder. Fetch, install, update and search wordlists archives.
 
+## Wordlists
+- [SecLists](https://github.com/danielmiessler/SecLists)
+
 
