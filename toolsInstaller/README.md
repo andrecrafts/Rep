@@ -31,5 +31,6 @@
 - [pimpmykali](https://github.com/Dewalt-arch/pimpmykali/blob/master/pimpmykali.sh)
 - [haiti](https://github.com/noraj/haiti) - hashcracker
 - [cook](https://github.com/glitchedgitz/cook) - An overpower wordlist generator
+- [wordlistctl](https://github.com/BlackArch/wordlistctl) - Wordlist finder. Fetch, install, update and search wordlists archives.
 
 
