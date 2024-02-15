@@ -1,0 +1,2 @@
+- [**rockyou2021.txt**](https://github.com/ohmybahgosh/RockYou2021.txt)
+- **[OneRuleToRuleThemAll.rule](https://github.com/NotSoSecure/password_cracking_rules/blob/master/OneRuleToRuleThemAll.rule)**
