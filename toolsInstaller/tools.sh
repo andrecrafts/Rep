@@ -236,6 +236,12 @@ InstallOtherTools(){
     InstallCook
 
 }
+
+
+echo "${orange} Run apt update and upgrade before running, otherwise this won't work."
+sleep 5
+
+
 # ***************************
 # **** Dependecies/Fixes ****
 # ***************************
