@@ -199,6 +199,10 @@ CheckforGolang(){ # Checks if go is installed
         echo "${orange}-> Golang already installed"
     fi
 }
+InstallPipx(){
+    sudo apt install pipx git
+    pipx ensurepath
+}
 CheckIfInstalled(){
     toolname=$1
     toollocation=$2
@@ -233,6 +237,7 @@ InstallCook(){
 }
 InstallOtherTools(){
     CheckIfInstalled "haiti" "/usr/local/bin/haiti" "sudo gem install haiti-hash"
+    CheckIfInstalled "netexec" "/home/$USER/.local/bin/netexec" "pipx install git+https://github.com/Pennyw0rth/NetExec"
     InstallCook
 
 }
@@ -240,7 +245,6 @@ InstallOtherTools(){
 
 echo "${orange} Run apt update and upgrade before running, otherwise this won't work."
 sleep 5
-
 
 # ***************************
 # **** Dependecies/Fixes ****
@@ -255,6 +259,7 @@ if [ $fix == true ]; then
     CheckforGolang
 
     CheckforImpacket
+    InstallPipx
 
     echo "${lightyellow}------Finished------"
     echo ""
