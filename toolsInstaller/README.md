@@ -32,6 +32,7 @@
 - [haiti](https://github.com/noraj/haiti) - hashcracker
 - [cook](https://github.com/glitchedgitz/cook) - An overpower wordlist generator
 - [wordlistctl](https://github.com/BlackArch/wordlistctl) - Wordlist finder. Fetch, install, update and search wordlists archives.
+- [netexec](https://github.com/Pennyw0rth/NetExec) - Successor to crackmapexec
 
 ## Wordlists
 - [SecLists](https://github.com/danielmiessler/SecLists)
