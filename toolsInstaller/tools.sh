@@ -150,14 +150,7 @@ DownloadGithub(){
         fi
         echo "${lightgreen}-> Extracted $output to $key-master"
     else # If not
-        if [ -d $key ]; then
-            cd $key
-        else
-            mkdir $key
-            cd $key
-        fi
         fileDownload $val $file $output
-        cd ..
     fi
     done
 }
