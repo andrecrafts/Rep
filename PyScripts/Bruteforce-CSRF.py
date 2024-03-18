@@ -47,6 +47,11 @@ def PostRequest(user, pwd):
     except:
         print(ex)
 
+def create_threads(username_list, password_list, max_threads=5):
+    with ThreadPoolExecutor(max_workers=max_threads) as executor:
+        for username in username_list:
+            for password in password_list:
+                executor.submit(PostRequest, username, password)
 
 # Start
 currentDate = str(datetime.now())
@@ -55,11 +60,6 @@ StartTime = time.perf_counter()
 user_list = open(user_file).read().split('\n') # Opens username wordlist and transforms it into a list ['user1','user2',..]
 pass_list = open(pass_file).read().split('\n') # Same as the username wordlist, but for passwords.
 
-def create_threads(username_list, password_list, max_threads=5):
-    with ThreadPoolExecutor(max_workers=max_threads) as executor:
-        for username in username_list:
-            for password in password_list:
-                executor.submit(PostRequest, username, password)
 
     
 create_threads(user_list, pass_list, max_threads=threads_num)
