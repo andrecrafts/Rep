@@ -23,4 +23,6 @@ elif(Points < 100):
     print(f"Guru Rank: {Points}%")
 elif(Points == 100):
     print(f"Omniscient Rank: {Points}%")
+else:
+    print(f"Omniscient Rank: {Points}%")
 print("---"*20)
