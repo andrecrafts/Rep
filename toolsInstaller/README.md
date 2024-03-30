@@ -33,6 +33,18 @@
 - [cook](https://github.com/glitchedgitz/cook) - An overpower wordlist generator
 - [wordlistctl](https://github.com/BlackArch/wordlistctl) - Wordlist finder. Fetch, install, update and search wordlists archives.
 - [netexec](https://github.com/Pennyw0rth/NetExec) - Successor to crackmapexec
+- Chimera
+- impacket-0.9.19
+- chameleon
+- hoaxs
+- PlumHound
+- username-anarchy
+- nessus
+- sstimap
+- TInjA
+- Cook
+- Mimikatz
+- Rubeus.exe
 
 ## Wordlists
 - [SecLists](https://github.com/danielmiessler/SecLists)
