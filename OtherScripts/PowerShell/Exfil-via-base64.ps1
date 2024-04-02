@@ -14,7 +14,7 @@ function b64_totext ([Parameter(Mandatory)] [string] $file_path, [Parameter(Mand
 	Write-Host "Decoded Base64 to $newfile_path"
 }
 function b64_tofile ([Parameter(Mandatory)] [string] $file_path, [Parameter(Mandatory)] [string] $newfile_path) {
-    	$byte_array = [System.IO.File]::ReadAllText($file_path)
+    	$base64String = [System.IO.File]::ReadAllText($file_path)
 	$fileBytes = [System.Convert]::FromBase64String($base64String)
 	[System.IO.File]::WriteAllBytes($newfile_path, $fileBytes)
 	Write-Host "Created $newfile_path from Base64"
