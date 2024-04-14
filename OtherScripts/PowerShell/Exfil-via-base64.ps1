@@ -1,12 +1,6 @@
 # Made by WafflesExploits
 # > Encode any type of file, and decoded as text or as a file.
 
-function file_to_b64 ([Parameter(Mandatory)] [string] $file_path, [Parameter(Mandatory)] [string] $newfile_path) {
-	$byte_array = [System.IO.File]::ReadAllBytes($file_path)
-	$base64 = [System.Convert]::ToBase64String($byte_array)
-	$base64 > $newfile_path
-	Write-Host "Encoded Base64 to $newfile_path"
-}
 function text_to_b64 ([Parameter(Mandatory)] [string] $payload) {
 	$Bytes = [System.Text.Encoding]::Unicode.GetBytes($payload)
 	$Base64_payload =[Convert]::ToBase64String($Bytes)
@@ -17,6 +11,12 @@ function b64_to_text ([Parameter(Mandatory)] [string] $file_path, [Parameter(Man
 	$decodedbase64 = [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($content))
 	$decodedbase64 > $newfile_path
 	Write-Host "Decoded Base64 to $newfile_path"
+}
+function file_to_b64 ([Parameter(Mandatory)] [string] $file_path, [Parameter(Mandatory)] [string] $newfile_path) {
+	$byte_array = [System.IO.File]::ReadAllBytes($file_path)
+	$base64 = [System.Convert]::ToBase64String($byte_array)
+	$base64 > $newfile_path
+	Write-Host "Encoded Base64 to $newfile_path"
 }
 function b64_to_file ([Parameter(Mandatory)] [string] $file_path, [Parameter(Mandatory)] [string] $newfile_path) {
     	$base64String = [System.IO.File]::ReadAllText($file_path)
