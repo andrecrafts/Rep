@@ -10,4 +10,5 @@ add-type @"
 }
 "@
 [System.Net.ServicePointManager]::CertificatePolicy = New-Object TrustAllCertsPolicy
+# HTTP GET request to the endpoint:
 iwr -Uri https://dc-2.dev.cyberbotic.io/certsrv
