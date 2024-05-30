@@ -2,7 +2,7 @@
 command="$@"
 if [ -z "$command" ]; then
 	echo "./generate_payloads.sh <commands>"
-	echo "./generate_payloads.sh --curl 'collaborator-link' #Adds paylaod name as a subdomain, so you can check which payload worked."
+	echo "./generate_payloads.sh --curl 'collaborator-link' #Adds payload name as a subdomain, so you can check which payload worked."
 	echo "./generate_payloads.sh --request 'curl' 'collaborator-link' #Same as --curl, but you can choose the command to use. E.g. use ping instead of curl."
 	exit
 fi
