@@ -48,5 +48,6 @@
 
 ## Wordlists
 - [SecLists](https://github.com/danielmiessler/SecLists)
+- [Bypass403HTTP](https://github.com/WafflesExploits/Rep/blob/main/Wordlists/bypass403.list)
 
 
