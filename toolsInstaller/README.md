@@ -44,7 +44,11 @@
 - TInjA
 - Cook
 - Mimikatz
+- VilainC2
+- Invoke-Mimikatz
+- Invoke-Rubeus
 - Rubeus.exe
+
 
 ## Wordlists
 - [SecLists](https://github.com/danielmiessler/SecLists)
