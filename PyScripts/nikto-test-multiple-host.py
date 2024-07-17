@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# Made by WafflesExploits
 import re
 import subprocess
 import argparse
@@ -28,11 +27,17 @@ with open(hosts_file) as f:
     hosts_list = re.sub('\n$', '', f.read()) # Reads File and removes last \n character
 hosts_list = hosts_list.split('\n')
 
+# Create nikto_results folder
+try:
+    print('Creating nikto_results folder...')
+    os.mkdir('./nikto_results')
+except:
+    print('Folder already exists!')
+
 # Run commands
 for host in hosts_list:
     print(f'*Started scanning {host}*')
     host_output = convert_to_output_file(host)
-    os.mkdir('./nikto_results')
     cmd = (f'nikto -h {host} -o ./nikto_results/{host_output}').split(' ')
     proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     o, e = proc.communicate()
