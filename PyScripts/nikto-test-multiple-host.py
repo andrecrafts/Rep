@@ -1,8 +1,11 @@
 #!/usr/bin/env python3
+# Made by WafflesExploits
 import re
 import subprocess
 import argparse
 import sys
+import os
+
 parser = argparse.ArgumentParser(description='Test multiple hosts on nikto. Provide a list of hosts in a file.', formatter_class=argparse.RawTextHelpFormatter)
 parser.add_argument('-hf','--hosts-file', type=str, help="Path to file containing hosts.")
 args = parser.parse_args()
@@ -29,7 +32,8 @@ hosts_list = hosts_list.split('\n')
 for host in hosts_list:
     print(f'*Started scanning {host}*')
     host_output = convert_to_output_file(host)
-    cmd = (f'nikto -h {host} -o {host_output}').split(' ')
+    os.mkdir('./nikto_results')
+    cmd = (f'nikto -h {host} -o ./nikto_results/{host_output}').split(' ')
     proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     o, e = proc.communicate()
     print(f'*Terminated scanning {host}*')
