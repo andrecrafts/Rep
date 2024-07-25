@@ -1,5 +1,7 @@
 # SimpleHTTPServer Improved
 ### -> This is slightly improved version of Python's SimpleHTTPServer, created for redirection purposes.
+I’m sharing this script because I found it incredibly useful, and I hope many of you will too.
+Feel free to share any improvements or suggestions. Happy Hacking!
 ### Description
 When I was perfoming a penetration test, I needed to host HTML files because the default Python server was downloading the files instead of rendering them. Additionally, the URLs couldn't contain dots. To solve this, I created a simple script to redirect users to specific HTML pages.
 
