@@ -1,3 +1,5 @@
+# Made by AndreCrafts
+# Create a summary of all text files in a project directory.
 import os
 import argparse
 from fnmatch import fnmatch
@@ -167,4 +169,5 @@ if __name__ == "__main__":
     if not os.path.isdir(args.project_path):
         print(f"Error: The specified path '{args.project_path}' is not a valid directory.")
     else:
+
         generate_project_summary(args.project_path, args.output)
